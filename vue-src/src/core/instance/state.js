@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-22 15:03:57
+ * @LastEditTime: 2019-09-22 15:44:55
  * @LastEditors: Do not edit
  */
 /* @flow */
@@ -41,7 +41,11 @@ const sharedPropertyDefinition = {
   get: noop,
   set: noop
 }
-
+/**
+ * @description: 定义getter setter通过Object.defineProperty怼target、key代理
+ * @param : 
+ * @return: 当我们访问this.message 就会访问 this.__data.message
+ */
 export function proxy (target: Object, sourceKey: string, key: string) {
   sharedPropertyDefinition.get = function proxyGetter () {
     return this[sourceKey][key]
@@ -116,6 +120,7 @@ function initProps (vm: Component, propsOptions: Object) {
   toggleObserving(true)
 }
 
+
 function initData (vm: Component) {
   let data = vm.$options.data
   data = vm._data = typeof data === 'function'
@@ -130,7 +135,12 @@ function initData (vm: Component) {
     )
   }
   // proxy data on instance
-  
+  /**
+ * @description: data、methods、props 不能重名
+ * @param :  140 - 166
+ * @return: 
+ */
+
   const keys = Object.keys(data)
   const props = vm.$options.props
   const methods = vm.$options.methods
