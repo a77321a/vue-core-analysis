@@ -1,3 +1,10 @@
+/*
+ * @Description: initProxy 对象访问劫持
+ * @Author: 辛顺宁
+ * @Date: 2019-09-22 15:03:57
+ * @LastEditTime: 2019-09-22 16:21:52
+ * @LastEditors: Do not edit
+ */
 /* not type checking this file because flow doesn't play well with Proxy */
 
 import config from 'core/config'
@@ -12,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
     'Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,' +
     'require' // for Webpack/Browserify
   )
-
+// 使用了没有在data或者methods中定义的变量 
   const warnNonPresent = (target, key) => {
     warn(
       `Property or method "${key}" is not defined on the instance but ` +
@@ -36,7 +43,7 @@ if (process.env.NODE_ENV !== 'production') {
 
   const hasProxy =
     typeof Proxy !== 'undefined' && isNative(Proxy)
-
+// 是否支持proxy
   if (hasProxy) {
     const isBuiltInModifier = makeMap('stop,prevent,self,ctrl,shift,alt,meta,exact')
     config.keyCodes = new Proxy(config.keyCodes, {

@@ -1,3 +1,10 @@
+/*
+ * @Description: vm.render
+ * @Author: 辛顺宁
+ * @Date: 2019-09-22 15:03:57
+ * @LastEditTime: 2019-09-22 16:23:28
+ * @LastEditors: Do not edit
+ */
 /* @flow */
 
 import {
@@ -112,6 +119,7 @@ export function renderMixin (Vue: Class<Component>) {
       vnode = vnode[0]
     }
     // return empty vnode in case the render function errored out
+    // 只能有一个vnode  
     if (!(vnode instanceof VNode)) {
       if (process.env.NODE_ENV !== 'production' && Array.isArray(vnode)) {
         warn(

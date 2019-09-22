@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-22 15:03:57
+ * @LastEditTime: 2019-09-22 16:06:41
+ * @LastEditors: Do not edit
+ */
 /* @flow */
 
 import config from '../config'
@@ -137,7 +144,11 @@ export function lifecycleMixin (Vue: Class<Component>) {
     }
   }
 }
-
+/**
+ * @description: 首先把el缓存，判断render函数，如果没有创建vnode
+ * @param : 
+ * @return: 
+ */
 export function mountComponent (
   vm: Component,
   el: ?Element,
@@ -146,6 +157,7 @@ export function mountComponent (
   vm.$el = el
   if (!vm.$options.render) {
     vm.$options.render = createEmptyVNode
+    // 开发环境报警告，runtime-only 没有写template
     if (process.env.NODE_ENV !== 'production') {
       /* istanbul ignore if */
       if ((vm.$options.template && vm.$options.template.charAt(0) !== '#') ||
@@ -164,10 +176,12 @@ export function mountComponent (
       }
     }
   }
+  // 生命周期开始
   callHook(vm, 'beforeMount')
 
   let updateComponent
   /* istanbul ignore if */
+  // mark performance 性能埋点
   if (process.env.NODE_ENV !== 'production' && config.performance && mark) {
     updateComponent = () => {
       const name = vm._name
@@ -187,6 +201,7 @@ export function mountComponent (
     }
   } else {
     updateComponent = () => {
+      // vm._render()会渲染一个vnode
       vm._update(vm._render(), hydrating)
     }
   }
@@ -194,6 +209,8 @@ export function mountComponent (
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
+  
+  // 渲染watcher  
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted && !vm._isDestroyed) {

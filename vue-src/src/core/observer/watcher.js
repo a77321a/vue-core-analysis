@@ -1,3 +1,10 @@
+/*
+ * @Description: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-22 15:03:57
+ * @LastEditTime: 2019-09-22 15:03:57
+ * @LastEditors: Do not edit
+ */
 /* @flow */
 
 import {
@@ -47,6 +54,7 @@ export default class Watcher {
     expOrFn: string | Function,
     cb: Function,
     options?: ?Object,
+    // 是否渲染watcher
     isRenderWatcher?: boolean
   ) {
     this.vm = vm

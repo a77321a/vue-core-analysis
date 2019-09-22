@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 14:43:01
- * @LastEditTime: 2019-09-22 14:43:01
+ * @LastEditTime: 2019-09-22 16:05:01
  * @LastEditors: Do not edit
  -->
 # Vue数据驱动
@@ -26,3 +26,7 @@ compiler 版本的 $monut 实现非常有意思，先来看一下 src/platfo
 
 
  为什么在生命周期可以访问 this.data  -> initState()
+
+ mountComponent 核心就是先调用 vm._render 方法先生成虚拟 Node，再实例化一个渲染Watcher，在它的回调函数中会调用 updateComponent 方法，最终调用 vm._update 更新 DOM。
+Watcher 在这里起到两个作用，一个是初始化的时候会执行回调函数，另一个是当 vm 实例中的监测的数据发生变化的时候执行回调函数，这块儿我们会在之后的章节中介绍。
+函数最后判断为根节点的时候设置 vm._isMounted 为 true， 表示这个实例已经挂载了，同时执行 mounted 钩子函数。 这里注意 vm.$vnode 表示 Vue 实例的父虚拟 Node，所以它为 Null 则表示当前是根 Vue 的实例。
