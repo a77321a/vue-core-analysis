@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-09-23 09:43:39
+ */
 /**
  * Virtual DOM patching algorithm based on Snabbdom by
  * Simon Friis Vindum (@paldepind)
@@ -696,7 +703,11 @@ export function createPatchFunction (backend) {
       return node.nodeType === (vnode.isComment ? 8 : 3)
     }
   }
-
+  /**
+   * @descripttion: 返回一个patch函数，使用大量辅助函数 是为了处理各种终端运行下的差异
+   * @param {type} 
+   * @return: 
+   */
   return function patch (oldVnode, vnode, hydrating, removeOnly) {
     if (isUndef(vnode)) {
       if (isDef(oldVnode)) invokeDestroyHook(oldVnode)

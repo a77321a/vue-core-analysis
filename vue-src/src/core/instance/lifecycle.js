@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-23 16:29:27
+ * @LastEditTime: 2019-09-23 17:21:03
  * @LastEditors: 辛顺宁
  */
 /* @flow */
@@ -63,8 +63,10 @@ export function initLifecycle (vm: Component) {
 }
 
 export function lifecycleMixin (Vue: Class<Component>) {
+  // 更新视图
   Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
     const vm: Component = this
+    // 数据改变调用
     const prevEl = vm.$el
     const prevVnode = vm._vnode
     const restoreActiveInstance = setActiveInstance(vm)
