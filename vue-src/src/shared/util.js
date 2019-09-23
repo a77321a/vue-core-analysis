@@ -1,29 +1,38 @@
+/*
+ * @Descripttion: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-09-23 15:32:56
+ */
 /* @flow */
-
+// 空白不可修改元素
 export const emptyObject = Object.freeze({})
 
 // These helpers produce better VM code in JS engines due to their
 // explicitness and function inlining.
-export function isUndef (v: any): boolean %checks {
+// 是否未定义或null 存在值为false 
+export function isUndef (v: any): boolean % checks {
   return v === undefined || v === null
 }
-
-export function isDef (v: any): boolean %checks {
+// 存在值为true
+export function isDef (v: any): boolean % checks {
   return v !== undefined && v !== null
 }
-
-export function isTrue (v: any): boolean %checks {
+// 纯布尔类型true
+export function isTrue (v: any): boolean % checks {
   return v === true
 }
-
-export function isFalse (v: any): boolean %checks {
+// 纯布尔类型false
+export function isFalse (v: any): boolean % checks {
   return v === false
 }
 
 /**
  * Check if value is primitive.
  */
-export function isPrimitive (value: any): boolean %checks {
+// 判断原始数据类型
+export function isPrimitive (value: any): boolean % checks {
   return (
     typeof value === 'string' ||
     typeof value === 'number' ||
@@ -38,7 +47,8 @@ export function isPrimitive (value: any): boolean %checks {
  * Objects from primitive values when we know the value
  * is a JSON-compliant type.
  */
-export function isObject (obj: mixed): boolean %checks {
+// 判断对象
+export function isObject (obj: mixed): boolean % checks {
   return obj !== null && typeof obj === 'object'
 }
 
@@ -46,7 +56,7 @@ export function isObject (obj: mixed): boolean %checks {
  * Get the raw type string of a value, e.g., [object Object].
  */
 const _toString = Object.prototype.toString
-
+// 
 export function toRawType (value: any): string {
   return _toString.call(value).slice(8, -1)
 }
@@ -66,6 +76,7 @@ export function isRegExp (v: any): boolean {
 /**
  * Check if val is a valid array index.
  */
+// 判断有效数组下标
 export function isValidArrayIndex (val: any): boolean {
   const n = parseFloat(String(val))
   return n >= 0 && Math.floor(n) === n && isFinite(val)
@@ -94,6 +105,7 @@ export function toString (val: any): string {
  * Convert an input value to a number for persistence.
  * If the conversion fails, return original string.
  */
+// 转换数字
 export function toNumber (val: string): number | string {
   const n = parseFloat(val)
   return isNaN(n) ? val : n
@@ -255,7 +267,7 @@ export function toObject (arr: Array<any>): Object {
  * Stubbing args to make Flow happy without leaving useless transpiled code
  * with ...rest (https://flow.org/blog/2017/05/07/Strict-Function-Call-Arity/).
  */
-export function noop (a?: any, b?: any, c?: any) {}
+export function noop (a?: any, b?: any, c?: any) { }
 
 /**
  * Always return false.

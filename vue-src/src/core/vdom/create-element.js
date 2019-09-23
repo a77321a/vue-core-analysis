@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-09-23 15:43:26
+ */
 /* @flow */
 
 import config from '../config'
@@ -26,13 +33,19 @@ const ALWAYS_NORMALIZE = 2
 // wrapper function for providing a more flexible interface
 // without getting yelled at by flow
 export function createElement (
+  // vm实例
   context: Component,
+  // 标签
   tag: any,
+  // 数据
   data: any,
+  // 子节点
   children: any,
+  // 
   normalizationType: any,
   alwaysNormalize: boolean
 ): VNode | Array<VNode> {
+  // 监测参数 没有data时 参数前移 对参数格式不一致处理
   if (Array.isArray(data) || isPrimitive(data)) {
     normalizationType = children
     children = data
@@ -51,6 +64,7 @@ export function _createElement (
   children?: any,
   normalizationType?: number
 ): VNode | Array<VNode> {
+  // 不允许data是响应式的
   if (isDef(data) && isDef((data: any).__ob__)) {
     process.env.NODE_ENV !== 'production' && warn(
       `Avoid using observed data object as vnode data: ${JSON.stringify(data)}\n` +

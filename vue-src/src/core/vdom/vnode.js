@@ -1,8 +1,15 @@
+/*
+ * @Descripttion: 虚拟dom
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-09-23 15:33:15
+ */
 /* @flow */
-
 export default class VNode {
   tag: string | void;
   data: VNodeData | void;
+  // 每个vnode都是一个树
   children: ?Array<VNode>;
   text: string | void;
   elm: Node | void;
@@ -11,6 +18,7 @@ export default class VNode {
   key: string | number | void;
   componentOptions: VNodeComponentOptions | void;
   componentInstance: Component | void; // component instance
+  // 父节点
   parent: VNode | void; // component placeholder node
 
   // strictly internal
@@ -29,13 +37,20 @@ export default class VNode {
   devtoolsMeta: ?Object; // used to store functional render context for devtools
   fnScopeId: ?string; // functional scope id support
 
-  constructor (
+  constructor(
+    // 标签名
     tag?: string,
+    // 值
     data?: VNodeData,
+    // 子节点
     children?: ?Array<VNode>,
+    // 文本节点
     text?: string,
+    // dom元素
     elm?: Node,
+    // this
     context?: Component,
+    // 服务器苏安然
     componentOptions?: VNodeComponentOptions,
     asyncFactory?: Function
   ) {
@@ -70,14 +85,14 @@ export default class VNode {
     return this.componentInstance
   }
 }
-
+// 创建空白虚拟dom
 export const createEmptyVNode = (text: string = '') => {
   const node = new VNode()
   node.text = text
   node.isComment = true
   return node
 }
-
+// 创建纯文本节点虚拟dom
 export function createTextVNode (val: string | number) {
   return new VNode(undefined, undefined, undefined, String(val))
 }
@@ -86,6 +101,7 @@ export function createTextVNode (val: string | number) {
 // used for static nodes and slot nodes because they may be reused across
 // multiple renders, cloning them avoids errors when DOM manipulations rely
 // on their elm reference.
+// 克隆虚拟dom
 export function cloneVNode (vnode: VNode): VNode {
   const cloned = new VNode(
     vnode.tag,

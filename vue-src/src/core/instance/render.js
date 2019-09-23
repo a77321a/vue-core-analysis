@@ -2,8 +2,8 @@
  * @Description: vm.render
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-22 16:23:28
- * @LastEditors: Do not edit
+ * @LastEditTime: 2019-09-23 15:37:24
+ * @LastEditors: 辛顺宁
  */
 /* @flow */
 
@@ -35,9 +35,11 @@ export function initRender (vm: Component) {
   // so that we get proper render context inside it.
   // args order: tag, data, children, normalizationType, alwaysNormalize
   // internal version is used by render functions compiled from templates
+  // 模板编译调用
   vm._c = (a, b, c, d) => createElement(vm, a, b, c, d, false)
   // normalization is always applied for the public version, used in
   // user-written render functions.
+  // 手写render函数调用
   vm.$createElement = (a, b, c, d) => createElement(vm, a, b, c, d, true)
 
   // $attrs & $listeners are exposed for easier HOC creation.

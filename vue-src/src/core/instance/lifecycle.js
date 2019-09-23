@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-22 16:06:41
- * @LastEditors: Do not edit
+ * @LastEditTime: 2019-09-23 16:29:27
+ * @LastEditors: 辛顺宁
  */
 /* @flow */
 
@@ -28,7 +28,7 @@ import {
 export let activeInstance: any = null
 export let isUpdatingChildComponent: boolean = false
 
-export function setActiveInstance(vm: Component) {
+export function setActiveInstance (vm: Component) {
   const prevActiveInstance = activeInstance
   activeInstance = vm
   return () => {
@@ -201,7 +201,7 @@ export function mountComponent (
     }
   } else {
     updateComponent = () => {
-      // vm._render()会渲染一个vnode
+      // vm._render()会渲染一个vnode，createElement返回值
       vm._update(vm._render(), hydrating)
     }
   }
@@ -209,7 +209,7 @@ export function mountComponent (
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
-  
+
   // 渲染watcher  
   new Watcher(vm, updateComponent, noop, {
     before () {
