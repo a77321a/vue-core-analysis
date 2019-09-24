@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-09-23 09:43:39
+ */
 /* @flow */
 
 import { ASSET_TYPES } from 'shared/constants'
@@ -15,6 +22,11 @@ export function initExtend (Vue: GlobalAPI) {
 
   /**
    * Class inheritance
+   */
+  /**
+   * @descripttion: 原型继承方式 返回一个子构造器
+   * @param {type} 
+   * @return: 
    */
   Vue.extend = function (extendOptions: Object): Function {
     extendOptions = extendOptions || {}

@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-09-24 11:24:54
+ */
 /* @flow */
 
 import VNode from './vnode'
@@ -99,9 +106,12 @@ const componentVNodeHooks = {
 const hooksToMerge = Object.keys(componentVNodeHooks)
 
 export function createComponent (
+  // 组件、函数、对象
   Ctor: Class<Component> | Function | Object | void,
+
   data: ?VNodeData,
   context: Component,
+  // 子vnode
   children: ?Array<VNode>,
   tag?: string
 ): VNode | Array<VNode> | void {
@@ -126,6 +136,7 @@ export function createComponent (
   }
 
   // async component
+  // 异步组件处理
   let asyncFactory
   if (isUndef(Ctor.cid)) {
     asyncFactory = Ctor
@@ -146,8 +157,12 @@ export function createComponent (
 
   data = data || {}
 
-  // resolve constructor options in case global mixins are applied after
-  // component constructor creation
+  /**
+   * @descripttion: 解决构造函数选项，以防在之后应用全局混合，
+   * 组件构造函数的创建
+   * @param {type} 
+   * @return: 
+   */
   resolveConstructorOptions(Ctor)
 
   // transform component v-model data into props & events
@@ -183,6 +198,11 @@ export function createComponent (
   }
 
   // install component management hooks onto the placeholder node
+  /**
+   * @descripttion: 组件挂载到占位符节点上
+   * @param {type} 
+   * @return: 
+   */
   installComponentHooks(data)
 
   // return a placeholder vnode
@@ -250,7 +270,7 @@ function mergeHook (f1: any, f2: any): Function {
 function transformModel (options, data: any) {
   const prop = (options.model && options.model.prop) || 'value'
   const event = (options.model && options.model.event) || 'input'
-  ;(data.attrs || (data.attrs = {}))[prop] = data.model.value
+    ; (data.attrs || (data.attrs = {}))[prop] = data.model.value
   const on = data.on || (data.on = {})
   const existing = on[event]
   const callback = data.model.callback

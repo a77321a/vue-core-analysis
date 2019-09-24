@@ -3,7 +3,7 @@
  * @Author: 辛顺宁
  * @Date: 2019-09-23 09:43:39
  * @LastEditors: 辛顺宁
- * @LastEditTime: 2019-09-23 15:43:26
+ * @LastEditTime: 2019-09-24 10:50:42
  */
 /* @flow */
 
@@ -136,6 +136,7 @@ export function _createElement (
     }
   } else {
     // direct component options / constructor
+    // createElement 传入组件时调用
     vnode = createComponent(tag, data, context, children)
   }
   if (Array.isArray(vnode)) {

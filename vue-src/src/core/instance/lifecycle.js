@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-23 17:21:03
+ * @LastEditTime: 2019-09-24 10:23:58
  * @LastEditors: 辛顺宁
  */
 /* @flow */
@@ -75,6 +75,18 @@ export function lifecycleMixin (Vue: Class<Component>) {
     // based on the rendering backend used.
     if (!prevVnode) {
       // initial render
+      /**
+       * @descripttion: 首次渲染，
+       * 所以在执行 patch 函数的时候，
+       * 传入的 vm.$el 对应的是例子中 id 为 app 的 DOM 对象，
+       * 这个也就是我们在 index.html 模板中写的 <div id="app">，
+       *  vm.$el 的赋值是在之前 mountComponent 函数做的，
+       * vnode 对应的是调用 render 函数的返回值，
+       * hydrating 在非服务端渲染情况下为 false，
+       * removeOnly 为 false。
+       * @param {type} 
+       * @return: 
+       */
       vm.$el = vm.__patch__(vm.$el, vnode, hydrating, false /* removeOnly */)
     } else {
       // updates
