@@ -3,7 +3,7 @@
  * @Author: 辛顺宁
  * @Date: 2019-09-23 09:43:39
  * @LastEditors: 辛顺宁
- * @LastEditTime: 2019-09-23 15:32:56
+ * @LastEditTime: 2019-09-25 10:25:30
  */
 /* @flow */
 // 空白不可修改元素
@@ -267,11 +267,13 @@ export function toObject (arr: Array<any>): Object {
  * Stubbing args to make Flow happy without leaving useless transpiled code
  * with ...rest (https://flow.org/blog/2017/05/07/Strict-Function-Call-Arity/).
  */
+// 空对象
 export function noop (a?: any, b?: any, c?: any) { }
 
 /**
  * Always return false.
  */
+// 返回false
 export const no = (a?: any, b?: any, c?: any) => false
 
 /* eslint-enable no-unused-vars */
@@ -279,6 +281,7 @@ export const no = (a?: any, b?: any, c?: any) => false
 /**
  * Return the same value.
  */
+// 返回本身
 export const identity = (_: any) => _
 
 /**

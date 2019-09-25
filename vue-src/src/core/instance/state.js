@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-22 15:44:55
- * @LastEditors: Do not edit
+ * @LastEditTime: 2019-09-25 11:13:44
+ * @LastEditors: 辛顺宁
  */
 /* @flow */
 
@@ -42,7 +42,7 @@ const sharedPropertyDefinition = {
   set: noop
 }
 /**
- * @description: 定义getter setter通过Object.defineProperty怼target、key代理
+ * @description: 定义getter setter通过Object.defineProperty对target、key代理
  * @param : 
  * @return: 当我们访问this.message 就会访问 this.__data.message
  */
@@ -90,7 +90,7 @@ function initProps (vm: Component, propsOptions: Object) {
     if (process.env.NODE_ENV !== 'production') {
       const hyphenatedKey = hyphenate(key)
       if (isReservedAttribute(hyphenatedKey) ||
-          config.isReservedAttr(hyphenatedKey)) {
+        config.isReservedAttr(hyphenatedKey)) {
         warn(
           `"${hyphenatedKey}" is a reserved attribute and cannot be used as component prop.`,
           vm
@@ -245,7 +245,7 @@ export function defineComputed (
     sharedPropertyDefinition.set = userDef.set || noop
   }
   if (process.env.NODE_ENV !== 'production' &&
-      sharedPropertyDefinition.set === noop) {
+    sharedPropertyDefinition.set === noop) {
     sharedPropertyDefinition.set = function () {
       warn(
         `Computed property "${key}" was assigned to but it has no setter.`,
@@ -271,7 +271,7 @@ function createComputedGetter (key) {
   }
 }
 
-function createGetterInvoker(fn) {
+function createGetterInvoker (fn) {
   return function computedGetter () {
     return fn.call(this, this)
   }
