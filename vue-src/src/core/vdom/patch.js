@@ -3,7 +3,7 @@
  * @Author: 辛顺宁
  * @Date: 2019-09-23 09:43:39
  * @LastEditors: 辛顺宁
- * @LastEditTime: 2019-09-23 18:30:39
+ * @LastEditTime: 2019-09-24 16:37:09
  */
 /**
  * Virtual DOM patching algorithm based on Snabbdom by
@@ -717,7 +717,7 @@ export function createPatchFunction (backend) {
 
     let isInitialPatch = false
     const insertedVnodeQueue = []
-
+    // oldVnode 为空
     if (isUndef(oldVnode)) {
       // empty mount (likely as component), create new root element
       isInitialPatch = true

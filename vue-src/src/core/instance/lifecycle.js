@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-24 10:23:58
+ * @LastEditTime: 2019-09-24 16:00:12
  * @LastEditors: 辛顺宁
  */
 /* @flow */
@@ -37,9 +37,11 @@ export function setActiveInstance (vm: Component) {
 }
 
 export function initLifecycle (vm: Component) {
+  // 此vm是子组件
   const options = vm.$options
 
   // locate first non-abstract parent
+  // parent是一个父组件vm实例
   let parent = options.parent
   if (parent && !options.abstract) {
     while (parent.$options.abstract && parent.$parent) {
@@ -47,7 +49,7 @@ export function initLifecycle (vm: Component) {
     }
     parent.$children.push(vm)
   }
-
+  // 建立父子关系
   vm.$parent = parent
   vm.$root = parent ? parent.$root : vm
 
