@@ -3,7 +3,7 @@
  * @Author: 辛顺宁
  * @Date: 2019-09-23 09:43:39
  * @LastEditors: 辛顺宁
- * @LastEditTime: 2019-09-23 09:43:39
+ * @LastEditTime: 2019-10-09 15:36:22
  */
 /* @flow */
 
@@ -25,6 +25,7 @@ export function initExtend (Vue: GlobalAPI) {
    */
   /**
    * @descripttion: 原型继承方式 返回一个子构造器
+   * extendOptions 就是我们定义的组件对象 
    * @param {type} 
    * @return: 
    */
