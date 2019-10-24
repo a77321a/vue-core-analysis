@@ -1,9 +1,9 @@
 /*
- * @Description: 
+ * @Description: watcher实例
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:03:57
- * @LastEditTime: 2019-09-22 15:03:57
- * @LastEditors: Do not edit
+ * @LastEditTime: 2019-10-23 18:27:25
+ * @LastEditors: 辛顺宁
  */
 /* @flow */
 
@@ -49,7 +49,7 @@ export default class Watcher {
   getter: Function;
   value: any;
 
-  constructor (
+  constructor(
     vm: Component,
     expOrFn: string | Function,
     cb: Function,
@@ -77,8 +77,10 @@ export default class Watcher {
     this.active = true
     this.dirty = this.lazy // for lazy watchers
     this.deps = []
+
     this.newDeps = []
     this.depIds = new Set()
+
     this.newDepIds = new Set()
     this.expression = process.env.NODE_ENV !== 'production'
       ? expOrFn.toString()
@@ -107,6 +109,7 @@ export default class Watcher {
    * Evaluate the getter, and re-collect dependencies.
    */
   get () {
+    // 把实例化watcher 放到当前计算的watcher中
     pushTarget(this)
     let value
     const vm = this.vm
@@ -133,6 +136,7 @@ export default class Watcher {
   /**
    * Add a dependency to this directive.
    */
+  // 添加依赖
   addDep (dep: Dep) {
     const id = dep.id
     if (!this.newDepIds.has(id)) {
@@ -147,6 +151,7 @@ export default class Watcher {
   /**
    * Clean up for dependency collection.
    */
+  // 清除依赖收集
   cleanupDeps () {
     let i = this.deps.length
     while (i--) {
@@ -155,6 +160,7 @@ export default class Watcher {
         dep.removeSub(this)
       }
     }
+    // depIds 就是对newDepIds的保留
     let tmp = this.depIds
     this.depIds = this.newDepIds
     this.newDepIds = tmp

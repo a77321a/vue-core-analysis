@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: watcher收集器
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-10-23 18:27:14
+ */
 /* @flow */
 
 import type Watcher from './watcher'
@@ -9,13 +16,17 @@ let uid = 0
 /**
  * A dep is an observable that can have multiple
  * directives subscribing to it.
- */
+*/
+// 建立联系
 export default class Dep {
+  // 当前watcher
   static target: ?Watcher;
+  // 自增的id
   id: number;
+  // 所以watcher
   subs: Array<Watcher>;
 
-  constructor () {
+  constructor() {
     this.id = uid++
     this.subs = []
   }
@@ -30,6 +41,7 @@ export default class Dep {
 
   depend () {
     if (Dep.target) {
+      // watcher.adddep
       Dep.target.addDep(this)
     }
   }

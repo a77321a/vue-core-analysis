@@ -39,7 +39,7 @@ export class Observer {
   dep: Dep;
   vmCount: number; // number of vms that have this object as root $data
 
-  constructor (value: any) {
+  constructor(value: any) {
     this.value = value
     this.dep = new Dep()
     this.vmCount = 0
@@ -157,6 +157,7 @@ export function defineReactive (
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
+    // 响应式对象被访问后会出发getter 把当前watcher作为当前响应式
     get: function reactiveGetter () {
       const value = getter ? getter.call(obj) : val
       if (Dep.target) {
