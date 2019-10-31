@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-10-24 17:03:14
+ */
 /* @flow */
 /* globals MutationObserver */
 
@@ -86,6 +93,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
 
 export function nextTick (cb?: Function, ctx?: Object) {
   let _resolve
+  // 推到队列中
   callbacks.push(() => {
     if (cb) {
       try {

@@ -1,3 +1,10 @@
+/*
+ * @Descripttion: 
+ * @Author: 辛顺宁
+ * @Date: 2019-09-23 09:43:39
+ * @LastEditors: 辛顺宁
+ * @LastEditTime: 2019-10-24 10:46:54
+ */
 /* @flow */
 
 import type Watcher from './watcher'
@@ -14,9 +21,13 @@ import {
 
 export const MAX_UPDATE_COUNT = 100
 
+// watcher队列
 const queue: Array<Watcher> = []
+// 激活的childer
 const activatedChildren: Array<Component> = []
+// 能不能重复添加
 let has: { [key: number]: ?true } = {}
+// 循环更新
 let circular: { [key: number]: number } = {}
 let waiting = false
 let flushing = false
@@ -68,6 +79,7 @@ if (inBrowser && !isIE) {
 /**
  * Flush both queues and run the watchers.
  */
+// 遍历队列 执行逻辑
 function flushSchedulerQueue () {
   currentFlushTimestamp = getNow()
   flushing = true
@@ -81,6 +93,11 @@ function flushSchedulerQueue () {
   //    user watchers are created before the render watcher)
   // 3. If a component is destroyed during a parent component's watcher run,
   //    its watchers can be skipped.
+  //在刷新之前对队列进行排序。
+  //这样可确保：
+  //1.组件从父级更新为子级。 （因为父母总是在子级之前创建）
+  //2.组件的用户监视程序在其呈现监视程序之前运行（因为用户观察者先于渲染观察者创建）
+  //3.如果组件在父组件的watcher销毁，可以跳过子组件的watcher。
   queue.sort((a, b) => a.id - b.id)
 
   // do not cache length because more watchers might be pushed
@@ -126,7 +143,7 @@ function flushSchedulerQueue () {
     devtools.emit('flush')
   }
 }
-
+// updated 钩子
 function callUpdatedHooks (queue) {
   let i = queue.length
   while (i--) {
@@ -160,6 +177,11 @@ function callActivatedHooks (queue) {
  * Push a watcher into the watcher queue.
  * Jobs with duplicate IDs will be skipped unless it's
  * pushed when the queue is being flushed.
+ */
+/**
+ *将观察者推入观察者队列。
+ *具有重复ID的作业将被跳过，除非
+ *在刷新队列时推送。
  */
 export function queueWatcher (watcher: Watcher) {
   const id = watcher.id
