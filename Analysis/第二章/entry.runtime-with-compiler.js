@@ -2,8 +2,8 @@
  * @Description: 
  * @Author: 辛顺宁
  * @Date: 2019-09-22 15:09:58
- * @LastEditTime: 2019-09-22 15:21:23
- * @LastEditors: Do not edit
+ * @LastEditTime: 2020-04-01 09:26:04
+ * @LastEditors: Please set LastEditors
  */
 // 缓存下vue原型上的$mount方法
 const mount = Vue.prototype.$mount
@@ -92,3 +92,5 @@ Vue.prototype.$mount = function (
   }
   return mount.call(this, el, hydrating)
 }
+
+// vm._update()   vue的更新
