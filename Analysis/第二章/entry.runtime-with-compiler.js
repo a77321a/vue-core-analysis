@@ -13,9 +13,9 @@ const mount = Vue.prototype.$mount
  * @return: 
  */
 Vue.prototype.$mount = function (
-  el?: string | Element,
-  hydrating?: boolean
-): Component {
+  el,
+  hydrating
+) {
   el = el && query(el)
 
   /**
