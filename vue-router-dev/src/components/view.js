@@ -1,6 +1,8 @@
 import { warn } from '../util/warn'
 import { extend } from '../util/misc'
 
+// routerview组件 
+
 export default {
   name: 'RouterView',
   functional: true,
@@ -79,11 +81,11 @@ export default {
       }
     }
 
-    // also register instance in prepatch hook
-    // in case the same component instance is reused across different routes
-    ;(data.hook || (data.hook = {})).prepatch = (_, vnode) => {
-      matched.instances[name] = vnode.componentInstance
-    }
+      // also register instance in prepatch hook
+      // in case the same component instance is reused across different routes
+      ; (data.hook || (data.hook = {})).prepatch = (_, vnode) => {
+        matched.instances[name] = vnode.componentInstance
+      }
 
     // register instance in init hook
     // in case kept-alive component be actived when routes changed
@@ -147,3 +149,5 @@ function resolveProps (route, config) {
       }
   }
 }
+
+
